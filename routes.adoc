@@ -5,13 +5,13 @@
 
 [[L1]]
 == Background
-I do a lot of hiking, especially in weird places where there are no infrastructure for walkers (marked trails, signboards, tourist maps, etc). This requires a lot of planning. For this purpose I have created a link:http://www.karpaterna.se/trailexplorer[map tool] where I can draw paths on top of various maps and GPS tracks. The tool will then calculate the distance along these paths, the elvetation gain/loss and an approximate hiking time. (I use a formula known as link:https://en.wikipedia.org/wiki/Tobler%27s_hiking_function[Tobler's hiking function] to calculate the hiking time.)
+I do a lot of hiking, especially in weird places where there is no infrastructure for walkers (marked trails, signboards, tourist maps, etc). This requires a lot of planning. For this purpose I have created a link:http://www.karpaterna.se/trailexplorer[map tool] where I can draw paths on top of various maps and GPS tracks. The tool will then calculate the distance along these paths, the elevation gain/loss and an approximate hiking time. (I use a formula known as link:https://en.wikipedia.org/wiki/Tobler%27s_hiking_function[Tobler's hiking function] to calculate the hiking time.)
 
-I would like to set up a database full of waypoints that are connected by a network of trails. When I want to go hiking somewhere, I can ask the database what route I should choose if I want to find the fastest way between two waypoints. If I have bad knees, I can ask for the route with the minimum amount of downhill walking. The more properties I can add to the wapoints and trails, the more possibilities I would have for finding routes based on diffetent criteria.
+I would like to set up a database of waypoints that are connected by a network of trails. When I want to go hiking somewhere, I could ask the database what route I should choose if I want to find the fastest way between two waypoints. If I have bad knees, I could ask for the route with the minimum amount of downhill walking. The more properties I can add to the waypoints and trails, the more possibilities I would have for finding routes based on diffetent criteria.
 
 [[L2]]
 === Graph Population 
-Click the + to see the full set-up Cypher script.
+This example sets up a very small database of waypoints connected by trails.
 //setup
 //hide
 [source,cypher]
@@ -40,12 +40,12 @@ CREATE
 
 [[L3-2]]
 === Graph Visualisation
-This shows the results of the above set-up script.
+This is a graphical visualisation of the database.
 //graph
 
 [[L4]]
 == The Next Step <<TOP, ^Top^>>
-In order to calculate a route between two waypoints, I would need some formulas and express them in the Cypher language. I did find link:http://gist.neo4j.org/?8635758[this example] on your website which performs similar actions. However, I didn't manage to learn enough Cypher to perform something similar for my database. The example below just illustrates what I am hoping to achieve.
+In order to calculate a route between two waypoints, I would need some formulas and express them in Cypher. I did find link:http://gist.neo4j.org/?8635758[this example] on your website which performs similar actions. However, I didn't manage to learn enough Cypher to perform something similar for my database. The example below just illustrates what I am hoping to achieve.
 
 Could you give me some hint on how to write it? :)
 
