@@ -5,22 +5,12 @@
 
 [[L1]]
 == Background
-I do a lot of hiking, especially in weird places where there are no infrastructure for walkers (marked trails, signboards, tourist maps, etc). This requires a lot of planning. For this purpose I have created a map tool where I can draw paths on top of various maps and GPS tracks. The tool will then calculate the distance along these paths, elvetation gain/loss and a calculated hiking time. I use a formula known as link:https://en.wikipedia.org/wiki/Tobler%27s_hiking_function[Toblers hiking function] where the speed is based on the slope of the path.
+I do a lot of hiking, especially in weird places where there are no infrastructure for walkers (marked trails, signboards, tourist maps, etc). This requires a lot of planning. For this purpose I have created a link:http://www.karpaterna.se/trailexplorer[map tool] where I can draw paths on top of various maps and GPS tracks. The tool will then calculate the distance along these paths, the elvetation gain/loss and an approximate hiking time. (I use a formula known as link:https://en.wikipedia.org/wiki/Tobler%27s_hiking_function[Tobler's hiking function] to calculate the hiking time.)
 
-I would like to save all these trails, which together make up a spiderweb-like trail network, in a database. I would then like to create database tools that can calulate the fastest way between two points, find the route with the lowest elevation gain between two points, and other similar functions.
+I would like to set up a database full of waypoints that are connected by a network of trails. When I want to go hiking somewhere, I can ask the database what route I should choose if I want to find the fastest way between two waypoints. If I have bad knees, I can ask for the route with the minimum amount of downhill walking. The more properties I can add to the wapoints and trails, the more possibilities I would have for finding routes based on diffetent criteria.
 
 [[L2]]
-== Model
-I imagine a mountain massif that contain a set of places of interest, let's call them _waypoints_. A waypoint will have a set of properties: a *name*, a *type* (bus stop, peak, hut, drinking water, etc) and an *elevation*. Then we have _trail sections_. One trail section is a path that connects two waypoints.
-
-++++
-<div class="paragraph">
-<p><span class="image"><img src="https://dl.dropboxusercontent.com/u/2900504/model%201.png" alt="Navigation Graph Model"></span></p>
-</div>
-++++
-
-[[L3-1]]
-=== Graph Population <<TOP, ^Top^>>
+=== Graph Population 
 Click the + to see the full set-up Cypher script.
 //setup
 //hide
@@ -37,26 +27,41 @@ CREATE
 (wp7:Waypoint{name:'Skäralid',elevation:'210m',type:'bus stop'}),
 
 // define trail sections
-(wp1)-[:TRAIL{km:4,minutes:65}]->(wp2),
-(wp2)-[:TRAIL{km:3.5,minutes:52}]->(wp3),
-(wp2)-[:TRAIL{km:0.1,minutes:5}]->(wp4),
-(wp3)-[:TRAIL{km:0.5,minutes:17}]->(wp4),
-(wp4)-[:TRAIL{km:3.1,minutes:54}]->(wp5),
-(wp4)-[:TRAIL{km:1.8,minutes:23}]->(wp6),
-(wp5)-[:TRAIL{km:7.2,minutes:112}]->(wp7),
-(wp6)-[:TRAIL{km:2.7,minutes:32}]->(wp7)
-
-
+(wp1)-[:TRAIL{km:4,minutes:65, elevationgain:120, elevationloss:78}]->(wp2),
+(wp2)-[:TRAIL{km:3.5,minutes:52, elevationgain:33, elevationloss:34}]->(wp3),
+(wp2)-[:TRAIL{km:0.1,minutes:5, elevationgain:23, elevationloss:194}]->(wp4),
+(wp3)-[:TRAIL{km:0.5,minutes:17, elevationgain:54, elevationloss:56}]->(wp4),
+(wp4)-[:TRAIL{km:3.1,minutes:54, elevationgain:183, elevationloss:11}]->(wp5),
+(wp4)-[:TRAIL{km:1.8,minutes:23, elevationgain:712, elevationloss:72}]->(wp6),
+(wp5)-[:TRAIL{km:7.2,minutes:112, elevationgain:12, elevationloss:109}]->(wp7),
+(wp6)-[:TRAIL{km:2.7,minutes:32, elevationgain:69, elevationloss:8}]->(wp7)
 
 ----
 
 [[L3-2]]
-=== Graph Visualisation <<TOP, ^Top^>>
+=== Graph Visualisation
 This shows the results of the above set-up script.
 //graph
 
-[[L4]]
-== The Next Step
+[[L4-2-x]]
+==== What is the shortest route from KT15 2QH to TW16 5AD? <<TOP, ^Top^>>
+This query calculates the shortest route between the two specified nodes. This is the shortest route based upon the number of traversals in the graph, and not upon the distance property on the relationships being traversed. This is the shortest route in the graph, not in reality. The next question deals with actual distance.
 
+Because there is more than one possible start and end node I have used LENGTH(), ORDER BY and LIMIT to return just the shortest route (calculated by the number of traversals). I did this before the RETURN statement, so that I did not have to return the count, which I would have to have done if ordering by count after the RETURN statement.
+[source,cypher]
+----
+MATCH p=shortestPath((a:Location)-[r*]->(b:Location))
+WHERE a.name = 'Röstånga'
+AND b.name = 'Skäralid'
+WITH p,relationships(p) AS r, length(relationships(p)) AS count
+ORDER BY count
+LIMIT 1
+RETURN p AS route
+----
+//table
+
+[[L4]]
+== The Next Step <<TOP, ^Top^>>
+In order to calculate a route between two waypoints, I would need some formulas and express them in the Cypher language. I did find link:http://gist.neo4j.org/?8635758[this example] on your website which performs similar actions.
 
 <<TOP, Back to top>>
