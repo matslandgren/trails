@@ -51,8 +51,8 @@ Because there is more than one possible start and end node I have used LENGTH(),
 [source,cypher]
 ----
 MATCH p=shortestPath((a:Location)-[r*]->(b:Location))
-WHERE a.name = 'Röstånga'
-AND b.name = 'Skäralid'
+WHERE a.name = 'Billinge'
+AND b.name = 'Klippan'
 WITH p,relationships(p) AS r, length(relationships(p)) AS count
 ORDER BY count
 LIMIT 1
