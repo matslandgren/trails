@@ -50,12 +50,9 @@ This query calculates the shortest route between the two specified nodes. This i
 Because there is more than one possible start and end node I have used LENGTH(), ORDER BY and LIMIT to return just the shortest route (calculated by the number of traversals). I did this before the RETURN statement, so that I did not have to return the count, which I would have to have done if ordering by count after the RETURN statement.
 [source,cypher]
 ----
-MATCH p=shortestPath((a:Location)-[km*]->(b:Location))
+MATCH p=shortestPath((a:Location)-[trail.km*]->(b:Location))
 WHERE a.name = 'Billinge'
 AND b.name = 'Klippan'
-WITH p,relationships(p) AS km, length(relationships(p)) AS count
-ORDER BY count
-LIMIT 1
 RETURN p AS route
 ----
 //table
