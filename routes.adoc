@@ -18,13 +18,13 @@ Click the + to see the full set-up Cypher script.
 ----
 CREATE 
 //define waypoints
-(wp1:Waypoint{name:'Röstånga',elevation:'300m',type:'bus stop'}),
+(wp1:Waypoint{name:'Billinge',elevation:'300m',type:'bus stop'}),
 (wp2:Waypoint{name:'Odensjön',elevation:'500m',type:'lake'}),
 (wp3:Waypoint{name:'Dahlbergs stuga',elevation:'430m',type:'hut'}),
 (wp4:Waypoint{name:'Hjortsprånget',elevation:'120m',type:'view point'}),
 (wp5:Waypoint{name:'Naturrum',elevation:'810m',type:'café'}),
 (wp6:Waypoint{name:'Kopparhatten',elevation:'710m',type:'viewpoint'}),
-(wp7:Waypoint{name:'Skäralid',elevation:'210m',type:'bus stop'}),
+(wp7:Waypoint{name:'Klippan',elevation:'210m',type:'bus stop'}),
 
 // define trail sections
 (wp1)-[:TRAIL{km:4,minutes:65, elevationgain:120, elevationloss:78}]->(wp2),
@@ -44,7 +44,7 @@ This shows the results of the above set-up script.
 //graph
 
 [[L4-2-x]]
-==== What is the shortest route from KT15 2QH to TW16 5AD? <<TOP, ^Top^>>
+==== What is the shortest route from Billinge to Klippan <<TOP, ^Top^>>
 This query calculates the shortest route between the two specified nodes. This is the shortest route based upon the number of traversals in the graph, and not upon the distance property on the relationships being traversed. This is the shortest route in the graph, not in reality. The next question deals with actual distance.
 
 Because there is more than one possible start and end node I have used LENGTH(), ORDER BY and LIMIT to return just the shortest route (calculated by the number of traversals). I did this before the RETURN statement, so that I did not have to return the count, which I would have to have done if ordering by count after the RETURN statement.
