@@ -1,0 +1,20 @@
+[[TOP]]
+= Hiking Routes Database =
+:author: Mats Landgren
+'''
+
+[[L1]]
+== Background
+I do a lot of hiking, especially in weird places where there are no infrastructure for walkers (marked trails, signboards, tourist maps, etc). This requires a lot of planning. For this purpose I have created a map tool where I can draw paths on top of various maps and GPS tracks. The tool will then calculate the distance along these paths, elvetation gain/loss and a calculated hiking time. I use a formula known as link:https://en.wikipedia.org/wiki/Tobler%27s_hiking_function[Toblers hiking function] where the speed is based on the slope of the path.
+
+I would like to save all these trails, which together make up a spiderweb-like trail network, in a database. I would then like to create database tools that can calulate the fastest way between two points, find the route with the lowest elevation gain between two points, and other similar functions.
+
+[[L2]]
+== Model
+I imagine a mountain massif that contain a set of places of interest, let's call them _waypoints_. A waypoint will have a set of properties: a *name*, a *type* (bus stop, peak, hut, drinking water, etc) and an *elevation*. Then we have _trail sections_. One trail section is a path that connects two waypoints.
+
+++++
+<div class="paragraph">
+<p><span class="image"><img src="https://dl.dropboxusercontent.com/u/2900504/model%201.png" alt="Navigation Graph Model"></span></p>
+</div>
+++++
