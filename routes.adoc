@@ -53,7 +53,7 @@ In order to calculate a route between two waypoints, for instance from Röstång
 ==== What is the shortest route from Röstånga to Skäralid?
 [source,cypher]
 ----
-RETURN a.name
+RETURN Waypoint.name
 ----
 //table
 
