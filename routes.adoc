@@ -45,16 +45,6 @@ This is a graphical visualisation of the database.
 
 [[L4]]
 == The Next Step <<TOP, ^Top^>>
-In order to calculate a route between two waypoints, for instance from Röstånga to Skäralid, I would need some formulas and express them in Cypher. I did find link:http://gist.neo4j.org/?8635758[this example] on your website which performs similar actions. However, I didn't manage to learn enough Cypher to perform something similar for my database. The example below just illustrates what I am hoping to achieve.
-
--> _Could you give me some hint on how to write the query below, please?_
-
-[[L4-1]]
-==== What is the shortest route from Röstånga to Skäralid?
-[source,cypher]
-----
-RETURN Waypoint.name
-----
-//table
+In order to calculate a route between two waypoints, for instance from Röstånga to Skäralid, I would need some formulas and express them in Cypher. I did find link:http://gist.neo4j.org/?8635758[this example] on your website which performs similar actions. However, I didn't manage to learn enough Cypher to perform something similar for my database. 
 
 <<TOP, Back to top>>
