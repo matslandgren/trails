@@ -53,10 +53,7 @@ In order to calculate a route between two waypoints, for instance from Röstång
 ==== What is the shortest route from Röstånga to Skäralid?
 [source,cypher]
 ----
-MATCH p=shortestPath((a:Waypoint)-[trail.km*]->(b:Waypoint))
-WHERE a.name = 'Röstånga'
-AND b.name = 'Skäralid'
-RETURN p AS route
+RETURN a.name
 ----
 //table
 
